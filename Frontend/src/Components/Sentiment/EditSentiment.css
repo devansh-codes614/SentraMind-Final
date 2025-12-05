@@ -1,0 +1,123 @@
+/* Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Popup box */
+.popup-box {
+  background: #fff;
+  padding: 30px 25px;
+  border-radius: 15px;
+  min-width: 360px;
+  max-width: 500px;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form styles */
+.sentiment-form h2 {
+  text-align: center;
+  color: #1B4332;
+}
+
+.sentiment-form .subtitle {
+  font-size: 14px;
+  text-align: center;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.sentiment-form input[type="text"],
+.sentiment-form input[type="date"],
+.sentiment-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.sentiment-form textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+/* Sentiment radio buttons */
+.sentiment-label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.sentiment-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.sentiment-options label {
+  background: #f0f4f9;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.sentiment-options input {
+  margin-right: 5px;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.buttons .btn {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px 0;
+  font-weight: 600;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.buttons .btn-primary {
+  background: linear-gradient(90deg, #9be7a1 0%, #1B4332 100%);
+  color: #fff;
+  border: none;
+}
+
+.buttons .btn-secondary {
+  background: #ccc;
+  border: none;
+  color: #333;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

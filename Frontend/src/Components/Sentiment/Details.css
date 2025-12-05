@@ -1,0 +1,29 @@
+.div{
+    padding: 10px;
+    /* position: relative; */
+    /* min-height: 300px;     */
+}
+
+.box{
+    margin-top: 125px;
+}
+
+.box p{
+    position: relative;
+    top: 150px;
+    display: flex;
+    justify-content: center;
+    color: rgb(111, 109, 109);
+}
+
+.editbtn{
+    position: sticky;
+    bottom: 580px;
+    right: 120px;
+}
+
+.dltBtn{
+    position: sticky;
+    bottom: 580px;
+    right: 70px;
+}
