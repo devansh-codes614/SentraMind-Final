@@ -100,7 +100,7 @@ Project will run on:
 
 Frontend → http://localhost:5173
 
-Backend → http://localhost:5000 (or your PORT)
+Backend → https://sentramind-backend.onrender.com (or your PORT)
 
 🤝 Contributions
 

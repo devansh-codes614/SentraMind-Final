@@ -5,7 +5,7 @@ import { AuthContext } from "../../Authentication/AuthProvider";
 import Article from "./Article";
 import NewSentiment from "./NewSentiment";
 import Details from "./Details";
-import api from "../../apiClient"; // ✅ SAME client (baseURL: http://localhost:5000, withCredentials: true)
+import api from "../../apiClient"; // ✅ SAME client (baseURL: https://sentramind-backend.onrender.com, withCredentials: true)
 
 const Sentiment = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -18,7 +18,7 @@ const Sentiment = () => {
 
   const fetchData = async () => {
     try {
-      const res = await api.get("/sentra"); // GET http://localhost:5000/sentra
+      const res = await api.get("/sentra"); // GET https://sentramind-backend.onrender.com/sentra
       setAllData(res.data);
     } catch (err) {
       console.error("Fetch sentiments error:", err);

@@ -5,7 +5,7 @@ const News = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/news")
+    fetch("https://sentramind-backend.onrender.com/news")
       .then((res) => res.json())
       .then((data) => {
         console.log("API DATA:", data);

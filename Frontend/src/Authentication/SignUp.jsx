@@ -24,7 +24,7 @@ function Signup() {
     try {
       console.log("Sending signup data:", formData);
 
-      // ✅ ye request jayegi: POST http://localhost:5000/signup
+      // ✅ ye request jayegi: POST https://sentramind-backend.onrender.com/signup
       const res = await api.post("/signup", formData);
 
       alert(res.data.message || "Signup successful!");
