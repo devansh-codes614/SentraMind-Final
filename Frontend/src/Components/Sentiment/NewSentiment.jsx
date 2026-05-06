@@ -1,64 +1,103 @@
 import React, { useState } from "react";
 import "./NewSentiment.css";
-import api from "../../apiClient"; // ✅ use same axios instance
+import api from "../../apiClient";
 
 const NewSentiment = ({ onClose, onSaved }) => {
   const [form, setForm] = useState({
     text: "",
     sentiment: "",
-    date: "",
   });
 
   const [customSentiment, setCustomSentiment] = useState("");
   const [showCustom, setShowCustom] = useState(false);
 
+  // =========================
+  // TEXT CHANGE
+  // =========================
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
   };
 
+  // =========================
+  // SENTIMENT CHANGE
+  // =========================
   const handleSentimentChange = (e) => {
     const value = e.target.value;
+
     if (value === "Other") {
       setShowCustom(true);
-      setForm({ ...form, sentiment: "" });
+
+      setForm({
+        ...form,
+        sentiment: "",
+      });
     } else {
       setShowCustom(false);
-      setForm({ ...form, sentiment: value });
+
+      setForm({
+        ...form,
+        sentiment: value,
+      });
     }
   };
 
+  // =========================
+  // CUSTOM SENTIMENT
+  // =========================
   const handleCustomSentimentChange = (e) => {
     setCustomSentiment(e.target.value);
-    setForm({ ...form, sentiment: e.target.value });
+
+    setForm({
+      ...form,
+      sentiment: e.target.value,
+    });
   };
 
+  // =========================
+  // SUBMIT
+  // =========================
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // ✅ backend create route: POST /sentra
-      // backend khud user = req.user.username, owner = req.user._id set karega
       await api.post("/sentra", {
         text: form.text,
         sentiment: form.sentiment,
-        date: form.date,
       });
 
-      if (onSaved) onSaved(); // list refresh
+      if (onSaved) onSaved();
+
       onClose();
     } catch (err) {
-      console.error("Create sentiment error:", err.response?.data || err.message);
-      alert(err.response?.data?.error || "Failed to save sentiment");
+      console.error(
+        "Create sentiment error:",
+        err.response?.data || err.message
+      );
+
+      alert(
+        err.response?.data?.error ||
+          "Failed to save sentiment"
+      );
     }
   };
 
   return (
     <div className="popup-overlay">
       <div className="popup-box">
-        <form onSubmit={handleSubmit} className="sentiment-form">
+        <form
+          onSubmit={handleSubmit}
+          className="sentiment-form"
+        >
           <h2>Mental Health Journal</h2>
-          <p className="subtitle">Share your current thoughts and feelings</p>
 
+          <p className="subtitle">
+            Share your current thoughts and feelings
+          </p>
+
+          {/* TEXT */}
           <textarea
             name="text"
             placeholder="Write your thoughts..."
@@ -67,7 +106,11 @@ const NewSentiment = ({ onClose, onSaved }) => {
             required
           />
 
-          <label className="sentiment-label">How are you feeling?</label>
+          {/* SENTIMENT */}
+          <label className="sentiment-label">
+            How are you feeling?
+          </label>
+
           <div className="sentiment-options">
             <label>
               <input
@@ -79,6 +122,7 @@ const NewSentiment = ({ onClose, onSaved }) => {
               />
               Happy
             </label>
+
             <label>
               <input
                 type="radio"
@@ -89,6 +133,7 @@ const NewSentiment = ({ onClose, onSaved }) => {
               />
               Sad
             </label>
+
             <label>
               <input
                 type="radio"
@@ -99,6 +144,7 @@ const NewSentiment = ({ onClose, onSaved }) => {
               />
               Neutral
             </label>
+
             <label>
               <input
                 type="radio"
@@ -111,6 +157,7 @@ const NewSentiment = ({ onClose, onSaved }) => {
             </label>
           </div>
 
+          {/* CUSTOM */}
           {showCustom && (
             <input
               type="text"
@@ -121,17 +168,15 @@ const NewSentiment = ({ onClose, onSaved }) => {
             />
           )}
 
-          <input
-            type="date"
-            name="date"
-            value={form.date}
-            onChange={handleChange}
-          />
-
+          {/* BUTTONS */}
           <div className="buttons">
-            <button type="submit" className="btn btn-primary">
+            <button
+              type="submit"
+              className="btn btn-primary"
+            >
               Save
             </button>
+
             <button
               type="button"
               className="btn btn-secondary"

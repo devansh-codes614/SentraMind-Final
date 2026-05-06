@@ -1,7 +1,19 @@
-.disclaimer{
-    padding-top: 5rem;
-    padding-bottom: 6rem;
-    margin-top: 30px;
-    font-size: small;
-    color: #07460b;
+.disclaimer {
+  width: 100%;
+  padding: 4rem 6rem;
+  background: #f5f5f5;
+  color: #1f3b2c;
+}
+
+.disclaimer p {
+  font-size: 12px;
+  line-height: 1.9;
+  max-width: 1200px;
+  margin: 0 auto 1.5rem auto;
+  text-align: left;
+}
+
+.disclaimer strong {
+  color: #0f2a1d;
+  font-weight: 700;
 }

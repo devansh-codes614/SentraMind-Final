@@ -14,6 +14,10 @@ const LocalStrategy = require("passport-local");
 const chatRoutes = require("./routes/chat.js");
 const listingRoutes = require("./routes/listing.js");
 const userRoutes = require("./routes/user.js");
+const dashboardRoutes = require("./routes/dashboard");
+const moodRoutes = require("./routes/mood");
+const sleepRoutes = require("./routes/sleep");
+const newsRoute = require("./routes/news");
 
 const { isLoggedIn } = require("./middlewares/middleware.js");
 const User = require("./models/user.js");
@@ -106,6 +110,10 @@ app.get("/demouser", async (req, res) => {
 app.use("/api", chatRoutes);
 app.use("/sentra", listingRoutes);
 app.use("/", userRoutes); // /signup, /login, /logout
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/mood", moodRoutes);
+app.use("/api/sleep", sleepRoutes);
+app.use("/news", newsRoute);
 
 // =====================
 // 404 Handler

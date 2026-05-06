@@ -46,15 +46,16 @@ const Sentiment = () => {
           {Array.isArray(allData) &&
             allData.map((item) => (
               <Article
-                key={item._id}
-                _id={item._id}
-                user={item.user}
-                date={item.date}
-                title={item.text}
-                owner={item.owner}
-                currentUser={currentUser}
-                onReadMore={() => setSelectedArticle(item._id)}
-              />
+  key={item._id}
+  _id={item._id}
+  user={item.user}
+  date={item.date}
+  title={item.text}
+  owner={item.owner}
+  currentUser={currentUser}
+  onReadMore={() => setSelectedArticle(item._id)}
+  onDeleted={fetchData}
+/>
             ))}
         </div>
 

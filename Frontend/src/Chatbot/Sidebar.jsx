@@ -1,25 +1,56 @@
-// Sidebar.jsx
 import React from "react";
 import "./Sidebar.css";
 
-const Sidebar = () => {
+const Sidebar = ({
+  chats,
+  activeChatId,
+  setActiveChatId,
+  createNewChat,
+  deleteChat,
+  searchTerm,
+  setSearchTerm,
+}) => {
   return (
     <div className="sidebar">
       <div className="sidebar-header">
         <h2>SentraMind</h2>
-        <p className="sidebar-subtitle">
-          Your safe space to write and reflect.
-        </p>
+      </div>
+
+      <button className="new-chat-btn" onClick={createNewChat}>
+        + New Chat
+      </button>
+
+      <div className="search-box">
+        <input
+          type="text"
+          placeholder="Search Chat"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
 
       <div className="sidebar-content">
-        <h4>Journaling Ideas</h4>
-        <ul>
-          <li>How was your day today?</li>
-          <li>Something that made you smile</li>
-          <li>A challenge you're facing</li>
-          <li>One small goal for tomorrow</li>
-        </ul>
+        <h4>Chat History</h4>
+
+        <div className="chat-history">
+          {chats.map((chat) => (
+            <div
+              key={chat.id}
+              className={`chat-item ${activeChatId === chat.id ? "active" : ""}`}
+            >
+              <span className="chat-title" onClick={() => setActiveChatId(chat.id)}>
+                {chat.title}
+              </span>
+
+              <button
+                className="delete-btn"
+                onClick={() => deleteChat(chat.id)}
+              >
+                ×
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
