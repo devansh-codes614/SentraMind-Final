@@ -39,7 +39,7 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: "https://sentra-mind-final.vercel.app",
     credentials: true,
   })
 );
