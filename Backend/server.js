@@ -37,12 +37,13 @@ const allowedOrigins = [
   "http://127.0.0.1:5173",
 ];
 
-app.use(
-  cors({
-    origin: "https://sentra-mind-final.vercel.app",
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://sentra-mind-final-ohtp3lnky-devansh-codes614s-projects.vercel.app"
+  ],
+  credentials: true
+}));
 
 // Preflight
 app.options("*", cors());
