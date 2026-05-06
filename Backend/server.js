@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 // =====================
 const allowedOrigins = [
   "http://localhost:5173",
-  "http://127.0.0.1:5173",
+  "http://https://sentramind-final.onrender.com:5173",
 ];
 
 app.use(cors({
@@ -137,7 +137,7 @@ app.use((err, req, res, next) => {
 // MongoDB Connection
 // =====================
 const dbUrl =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/sentramind";
+  process.env.MONGODB_URI || "mongodb://https://sentramind-final.onrender.com:27017/sentramind";
 
 async function connectDB() {
   try {
