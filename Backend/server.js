@@ -1,6 +1,5 @@
 // server.js
 
-// Load env variables
 require("dotenv").config();
 
 const express = require("express");
@@ -30,25 +29,27 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // =====================
-// CORS (Frontend: http://localhost:5173)
+// CORS
 // =====================
-const allowedOrigins = [
-  "http://localhost:5173",
-  "http://https://https://sentramind-backend-ymzz.onrender.com:5173",
-];
-
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://sentra-mind-final-ohtp3lnky-devansh-codes614s-projects.vercel.app"
+    "https://sentra-mind-final.vercel.app"
   ],
   credentials: true
 }));
 
-// Preflight
-app.options("*", cors());
+app.options("*", cors({
+  origin: [
+    "http://localhost:5173",
+    "https://sentra-mind-final.vercel.app"
+  ],
+  credentials: true
+}));
 
-// (optional) simple logger – request dekhne ke liye
+// =====================
+// Logger
+// =====================
 app.use((req, res, next) => {
   console.log("REQ:", req.method, req.url);
   next();
@@ -62,7 +63,7 @@ const sessionOptions = {
   resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     secure: process.env.NODE_ENV === "production",
@@ -72,12 +73,13 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 
 // =====================
-// Passport Auth Setup
+// Passport Setup
 // =====================
 app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(new LocalStrategy(User.authenticate()));
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -86,7 +88,7 @@ passport.deserializeUser(User.deserializeUser());
 // =====================
 
 app.get("/", (req, res) => {
-  res.send("SentraMind Backend Root!");
+  res.send("✅ SentraMind Backend Running");
 });
 
 app.get("/new", isLoggedIn, (req, res) => {
@@ -99,21 +101,34 @@ app.get("/demouser", async (req, res) => {
       email: "gaurav@gmail.com",
       username: "gaurav",
     });
+
     const registeredUser = await User.register(fakeUser, "hello123");
+
     res.json(registeredUser);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "Failed to create demo user" });
+
+    res.status(500).json({
+      error: "Failed to create demo user",
+    });
   }
 });
 
+// =====================
 // API Routes
+// =====================
 app.use("/api", chatRoutes);
+
 app.use("/sentra", listingRoutes);
-app.use("/", userRoutes); // /signup, /login, /logout
+
+app.use("/", userRoutes);
+
 app.use("/api/dashboard", dashboardRoutes);
+
 app.use("/api/mood", moodRoutes);
+
 app.use("/api/sleep", sleepRoutes);
+
 app.use("/api/news", newsRoute);
 
 // =====================
@@ -128,20 +143,21 @@ app.all("*", (req, res, next) => {
 // =====================
 app.use((err, req, res, next) => {
   console.error("ERROR:", err);
-  res
-    .status(err.statusCode || 500)
-    .json({ error: err.message || "Something went wrong!" });
+
+  res.status(err.statusCode || 500).json({
+    error: err.message || "Something went wrong!",
+  });
 });
 
 // =====================
 // MongoDB Connection
 // =====================
-const dbUrl =
-  process.env.MONGODB_URI || "mongodb://https://https://sentramind-backend-ymzz.onrender.com:27017/sentramind";
+const dbUrl = process.env.MONGODB_URI;
 
 async function connectDB() {
   try {
     await mongoose.connect(dbUrl);
+
     console.log("✅ Connected to MongoDB");
   } catch (err) {
     console.log("❌ MongoDB Error:", err);
@@ -156,5 +172,5 @@ connectDB();
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
