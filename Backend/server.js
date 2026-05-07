@@ -114,7 +114,7 @@ app.use("/", userRoutes); // /signup, /login, /logout
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/mood", moodRoutes);
 app.use("/api/sleep", sleepRoutes);
-app.use("/news", newsRoute);
+app.use("/api/news", newsRoute);
 
 // =====================
 // 404 Handler
