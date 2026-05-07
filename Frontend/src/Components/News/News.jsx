@@ -5,7 +5,7 @@ const News = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    fetch("https://sentramind-backend.onrender.com/news")
+    fetch("https://sentramind-backend-ymzz.onrender.com/api/news")
       .then((res) => res.json())
       .then((data) => {
         console.log("API DATA:", data);
@@ -37,9 +37,14 @@ const News = () => {
 
             <div className="news-content">
               <p>{new Date(article.publishedAt).toDateString()}</p>
+
               <h2>{article.title}</h2>
 
-              <a href={article.url} target="_blank" rel="noreferrer">
+              <a
+                href={article.url}
+                target="_blank"
+                rel="noreferrer"
+              >
                 Read Full Article
               </a>
             </div>
